@@ -1,4 +1,6 @@
 # lab1在线练习
+## GDT
+关于[全局描述符表](http://www.blogfshare.com/gdt-ldt.html) 
 
 ## 选择题
 
@@ -36,5 +38,7 @@ GCC内联汇编 `asm("movl %ecx, %eax");` 的含义是()
 - [x] 内核堆栈
 
 >在ucore处理中，上述几个都是要设置好的。
+
+
 
 ---
