@@ -7,7 +7,7 @@
  - 仔细观察自己使用的计算机的启动过程和linux/ucore操作系统运行后的情况。
  - 了解控制流，异常控制流，函数调用,中断，异常(故障)，系统调用（陷阱）,切换，用户态（用户模式），内核态（内核模式）等基本概念。思考一下这些基本概念在linux, ucore, v9-cpu中的os*.c中是如何具体体现的。
  - 思考为什么操作系统需要处理中断，异常，系统调用。这些是必须要有的吗？有哪些好处？有哪些不好的地方？
- - 了解在PC机上有啥中断和异常。搜索“80386　开机　启动”
+ - 了解在PC机上有啥中断和异常。搜索[80386 开机　启动](http://blog.csdn.net/ymzhou117/article/details/11950039)
  - 安装好ucore实验环境，能够编译运行lab8的answer
  - 了解Linux和ucore有哪些系统调用。搜索“linux 系统调用", 搜索lab8中的syscall关键字相关内容。
  - 会使用linux中的命令:objdump，nm，file, strace，了解这些命令的用途。
@@ -18,15 +18,14 @@
 
 ## 3.1 BIOS
  1. 比较UEFI和BIOS的区别。
- >[UEFI](http://www.ihacksoft.com/uefi.html)([wiki](https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface))作为传统BIOS的继任者，UEFI拥有前辈所不具备的诸多功能，比如图形化界面、多种多样的操作方式、允许植入硬件驱动等等。这些特性让UEFI相比于传统BIOS更加易用、更加多功能、更加方便。<br>
+ >[UEFI](http://www.ihacksoft.com/uefi.html)([wiki](https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface))作为传统BIOS的继任者，拥有BIOS所不具备的诸多功能，比如图形化界面、多种多样的操作方式、允许植入硬件驱动等等。这些特性让UEFI相比于传统BIOS更加易用、更加多功能、更加方便。<br>
 相比于BIOS，UEFI的优势有以下几点<br>
 
 ```
-* Ability to boot from large disks (over 2 TB) with a GUID Partition Table (GPT)[13][b]
-* CPU-independent architecture[b]
-* CPU-independent drivers[b]
-* Flexible pre-OS environment, including network capability
-* Modular design
+* 能够从大于2TB的硬盘中启动
+* CPU无关的架构和驱动，平台通用
+* 更灵活的功能和更友好的界面
+* 模块化设计，由高级语言编写
 ```
 UEFI本身相当于一个微型操作系统，UEFI已具备文件系统的支持，它能够直接读取FAT分区中的文件。其次，可开发出直接在UEFI下运行的应用程序，这类程序文件通常以efi结尾。既然UEFI可以直接识别FAT分区中的文件，又有可直接在其中运行的应用程序。那么完全可以将Windows安装程序做成efi类型应用程序，然后把它放到任意fat分区中直接运行即可，也就是说UEFI不需要主引导记录，也不需要活动分区，就能完成系统的启动。
 
@@ -44,6 +43,19 @@ UEFI本身相当于一个微型操作系统，UEFI已具备文件系统的支持
 ## 3.3 中断、异常和系统调用比较
  1. 举例说明Linux中有哪些中断，哪些异常？
  1. Linux的系统调用有哪些？大致的功能分类有哪些？  (w2l1)
+> Linux的系统调用超过两百个，按照功能逻辑大致可以分为如下几类：
+> 
+```
+  >
+  > 1. 进程控制：fork/clone/execve等，负责创建、终止、挂起进程等基本操作
+  > 2. 文件系统控制：open/creat/close等，主要负责文件读写、文件系统操作
+  > 3. 系统控制：ioctl/reboot/sysinfo等，负责系统内核相关信息的查询以及一些系统级别的控制操作
+  > 4. 内存管理：brk/sbrk/mlock等，负责分配、释放内存、地址映射等内存相关的操作
+  > 5. 网络管理：getdomainname/setdomainname等，负责查询和设置域名等网络管理功能
+  > 6. socket控制：socket/bind/connect等，负责套接字操作
+  > 7. 用户管理：getuid/setuid/getgid等，负责用户和组相关信息的设置和查询
+  > 8. 进程间通信：ipc/kill/signal等，负责进程间的消息、信号、管道、共享内存等通信操作 
+ ```
 
 ```
   + 采分点：说明了Linux的大致数量（上百个），说明了Linux系统调用的主要分类（文件操作，进程管理，内存管理等）
@@ -53,7 +65,8 @@ UEFI本身相当于一个微型操作系统，UEFI已具备文件系统的支持
   - 答案除了对上述两个要点都进行了正确阐述外，还进行了扩展和更丰富的说明（3分）
  ```
  
- 1. 以ucore lab8的answer为例，uCore的系统调用有哪些？大致的功能分类有哪些？(w2l1)
+ 1. 以ucore lab8的answer为例，uCore的系统调用有哪些？大致的功能分类有哪些？(w2l1)系统调用的定义参见`ucore_os_lab/labcodes/lab8/user/libs/syscall.h`
+ > ucore的系统调用有22个，主要分为文件操作，内存管理，进程管理和输出
  
  ```
   + 采分点：说明了ucore的大致数量（二十几个），说明了ucore系统调用的主要分类（文件操作，进程管理，内存管理等）
@@ -83,6 +96,7 @@ UEFI本身相当于一个微型操作系统，UEFI已具备文件系统的支持
  1. 通过调试[lab1_ex1](https://github.com/chyyuu/ucore_lab/blob/master/related_info/lab1/lab1-ex1.md)了解Linux应用的系统调用执行过程。(w2l1)
  >[strace](http://man.linuxde.net/strace)可以执行一个指定的命令，在命令执行的过程中，strace会记录和解析命令进程的所有系统调用以及这个进程所接收到的所有的信号值<br>
 利用strace可以看到lab1-ex1.exe执行过程中的系统调用统计和过程<br>
+其中所有涉及的系统调用如下：
 [execve](http://blog.163.com/fan_yishan/blog/static/47692213201491251120755/)、[brk](http://blog.csdn.net/sgbfblog/article/details/7772153)、[access](http://blog.sina.com.cn/s/blog_6a1837e90100uh5d.html)、[mmap](http://blog.chinaunix.net/uid-26669729-id-3077015.html)、open、close、[fstat](http://blog.sina.com.cn/s/blog_803527e70100veqr.html)、[mprotect](http://blog.csdn.net/ustc_dylan/article/details/6941768)、munmap、write、[arch_prctl](http://man7.org/linux/man-pages/man2/arch_prctl.2.html)<br>
 系统调用由应用程序发起，通过int 0x80进行软中断，之后系统跳转到一个预设的内核空间地址中的system_call系统调用处理函数，通过eax中的系统调用号查表计算出服务程序入口地址，并将参数压栈后跳转到服务程序进行处理
 
