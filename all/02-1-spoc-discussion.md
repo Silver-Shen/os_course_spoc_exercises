@@ -27,7 +27,7 @@
 * 更灵活的功能和更友好的界面
 * 模块化设计，由高级语言编写
 ```
-UEFI本身相当于一个微型操作系统，UEFI已具备文件系统的支持，它能够直接读取FAT分区中的文件。其次，可开发出直接在UEFI下运行的应用程序，这类程序文件通常以efi结尾。既然UEFI可以直接识别FAT分区中的文件，又有可直接在其中运行的应用程序。那么完全可以将Windows安装程序做成efi类型应用程序，然后把它放到任意fat分区中直接运行即可，也就是说UEFI不需要主引导记录，也不需要活动分区，就能完成系统的启动。
+>UEFI本身相当于一个微型操作系统，UEFI已具备文件系统的支持，它能够直接读取FAT分区中的文件。其次，可开发出直接在UEFI下运行的应用程序，这类程序文件通常以efi结尾。既然UEFI可以直接识别FAT分区中的文件，又有可直接在其中运行的应用程序。那么完全可以将Windows安装程序做成efi类型应用程序，然后把它放到任意fat分区中直接运行即可，也就是说UEFI不需要主引导记录，也不需要活动分区，就能完成系统的启动。
 
  2. 描述PXE的大致启动流程。
  [wiki](https://en.wikipedia.org/wiki/Preboot_Execution_Environment)<br>
@@ -42,10 +42,67 @@ UEFI本身相当于一个微型操作系统，UEFI已具备文件系统的支持
  
 ## 3.3 中断、异常和系统调用比较
  1. 什么是中断、异常和系统调用？
+ >中断一般是来自外设的信号，为了避免CPU轮询查看外设而设计；异常CPU在执行当前指令时产生的错误，和指令相关，一般是同步的；系统调用是异常的一个子集，是应用程序主动向系统索取服务时调用的
  2. 中断、异常和系统调用的处理流程有什么异同？
  2. 举例说明Linux中有哪些中断，哪些异常？
  3. 以ucore lab8的answer为例，uCore的时钟中断处理流程。
- 1. Linux的系统调用有哪些？大致的功能分类有哪些？  (w2l1)
+ >时钟中断在clock.c中产生，产生时钟中断之后CPU跳转到kern/trap/trapentry.s中
+ 
+ ```
+.text
+.globl __alltraps
+__alltraps:
+    push registers to build a trap frame
+    therefore make the stack look like a struct trapframe
+    pushl %ds
+    pushl %es
+    pushl %fs
+    pushl %gs
+    pushal
+ ```
+在.s中有__alltraps函数负责处理所有中断，保存一些段寄存器和上写文信息，之后调用trap函数
+
+```
+trap(struct trapframe *tf) {
+    // dispatch based on what type of trap occurred
+    // used for previous projects
+    if (current == NULL) {
+        trap_dispatch(tf);
+    }
+    else {
+        // keep a trapframe chain in stack
+        struct trapframe *otf = current->tf;
+        current->tf = tf;
+    
+        bool in_kernel = trap_in_kernel(tf);
+    
+        trap_dispatch(tf);
+    
+        current->tf = otf;
+        if (!in_kernel) {
+            if (current->flags & PF_EXITING) {
+                do_exit(-E_KILLED);
+            }
+            if (current->need_resched) {
+                schedule();
+            }
+        }
+    }
+}
+```
+这个中断处理的函数在 kern/trap/trap.c 中，trap函数进而调用trap_dispatch函数进行分派
+在dispatch函数中根据中断号进行判断，当符合IRQ_OFFSET + IRQ_TIMER（即时钟中断时）
+
+```
+case IRQ_OFFSET + IRQ_TIMER:
+        ticks ++;
+        assert(current != NULL);
+        run_timer_list();
+        break;
+```   
+进而进入run_timer_list进行处理
+
+1. Linux的系统调用有哪些？大致的功能分类有哪些？  (w2l1)
 > Linux的系统调用超过两百个，按照功能逻辑大致可以分为如下几类：
 > 
 ```
@@ -119,5 +176,18 @@ UEFI本身相当于一个微型操作系统，UEFI已具备文件系统的支持
  
 ## 3.6 请分析函数调用和系统调用的区别
  1. 请从代码编写和执行过程来说明。
-   1. 说明`int`、`iret`、`call`和`ret`的指令准确功能
+ >系统调用是操作系统给用户程序提供服务的接口，其本质是主动产生一个异常，进入异常处理程序，这个过程涉及到用户态内核态的转换，也涉及到用户栈和内核栈的内存转换。系统调用是操作系统相关的，而函数调用是操作系统无关的。系统调用实际上是最底层的调用，面向的是硬件和外部设备；而函数调用面向的更多是应用程序开发，相当于一套API，无法直接控制和操作硬件；故想直接控制硬件需要使用系统调用（某些函数库底层封装了系统调用，故也可间接控制硬件）
+以下是细节：
+
+```
+1.状态：系统调用可能涉及到用户态内核态的转换，而函数调用不涉及。
+2.内存：由于用户栈和内核栈不同，由于状态切换，从安全性考虑，内核态和用户态的栈是分开的，所以系统调用中会存在内存的切换。包括TLB等缓存的切换。
+3.功能：函数调用是为了让程序更加模块化，代码复用等而存在的。系统调用是操作系统为用户程序提供服务的接口，库函数也会封装某些系统调用。
+4.效率：系统调用较函数调用更加消耗资源。因为存在额外的开销。额外开销包括：保存现场，内存栈的转换，内核态用户态转换，TLB的失效等。
+5.兼容性：系统调用是操作系统相关的，函数调用是操作系统无关的。
+ 
+这里额外增加说明库函数调用和系统调用的区别：(和原问题略有不同)
+库函数中会封装某些系统调用的功能，而库函数的封装会使这些服务在不同的操作系统上有着相同的接口，是跨操作系统的。使用库函数属于函数调用，但在其执行的过程中涉及系统调用。
+```
+ 1. 说明`int`、`iret`、`call`和`ret`的指令准确功能
  
