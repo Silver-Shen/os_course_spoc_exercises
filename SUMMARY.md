@@ -9,7 +9,7 @@
 * [中断、异常和系统调用](all/2-intr.md) **(done)**
     * [lec3 SPOC讨论](all/02-1-spoc-discussion.md)**(done)**
     * [lab1 在线练习](all/02-2-lab1-quiz.md)**(done)**
-    * [lab1 SPOC讨论](all/02-2-lab1-spoc-discussion.md)
+    * [lab1 SPOC讨论](all/02-2-lab1-spoc-discussion.md)**(done)**
 * [物理内存管理](all/3&4-pmm.md)
     * [lec5 在线练习](all/03-1-quiz.md)
     * [lec5 SPOC讨论](all/03-1-spoc-discussion.md)

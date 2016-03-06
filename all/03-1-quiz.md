@@ -36,7 +36,8 @@
 - [ ] 分区对换(Swapping in/out)
 - [x] 都不是
 
-> 分页方式不会有外碎片
+> `分页方式不会有外碎片`
+> [内存管理碎片概述](http://blog.csdn.net/kennyrose/article/details/7530330)
 
 描述伙伴系统(Buddy System)特征正确的是() s5
 
