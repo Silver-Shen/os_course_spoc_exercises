@@ -78,20 +78,24 @@ NOTICE
 PTEs）大小为1 Byte，1个页目录表大小为32 Bytes，1个页表大小为32 Bytes。页目录基址寄存器（page directory base register，PDBR）保存了页目录表的物理地址（按页对齐）。
 
 PTE格式（8 bit） :
+
 ```
   VALID | PFN6 ... PFN0
 ```
 PDE格式（8 bit） :
+
 ```
   VALID | PT6 ... PT0
 ```
 其
+
 ```
 VALID==1表示，表示映射存在；VALID==0表示，表示映射不存在。
 PFN6..0:页帧号
 PT6..0:页表的物理基址>>5
 ```
 在[物理内存模拟数据文件](./03-2-spoc-testdata.md)中，给出了4KB物理内存空间的值，请回答下列虚地址是否有合法对应的物理内存，请给出对应的pde index, pde contents, pte index, pte contents。
+
 ```
 1) Virtual Address 6c74
    Virtual Address 6b22
@@ -125,7 +129,7 @@ Virtual Address 7268:
 
 
 （3）请基于你对原理课二级页表的理解，并参考Lab2建页表的过程，设计一个应用程序（可基于python、ruby、C、C++、LISP、JavaScript等）可模拟实现(2)题中描述的抽象OS，可正确完成二级页表转换。
-
+[Github仓库](https://github.com/Silver-Shen/PageTable)
 
 （4）假设你有一台支持[反置页表](http://en.wikipedia.org/wiki/Page_table#Inverted_page_table)的机器，请问你如何设计操作系统支持这种类型计算机？请给出设计方案。
 
