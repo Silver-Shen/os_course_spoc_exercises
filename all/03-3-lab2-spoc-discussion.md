@@ -20,6 +20,7 @@ x86保护模式中权限管理无处不在，下面哪些时候要检查访问�
 
 
 请描述ucore OS建立页机制的准备工作包括哪些步骤？ (w4l1) 
+
 ```
   + 采分点：说明了ucore OS在让页机制正常工作的主要准备工作
   - 答案没有涉及如下3点；（0分）
@@ -59,6 +60,7 @@ x86保护模式中权限管理无处不在，下面哪些时候要检查访问�
 > 
 
 （3）对于lab2的输出信息，请说明数字的含义
+
 ```
 e820map:
   memory: 0009fc00, [00000000, 0009fbff], type = 1.
@@ -74,6 +76,7 @@ e820map:
 > 
 
 （4）(spoc)有一台只有页机制的简化80386的32bit计算机，有地址范围位0~256MB的物理内存空间（physical memory），可表示大小为256MB，范围为0xC0000000~0xD0000000的虚拟地址空间（virtual address space）,页大小（page size）为4KB，采用二级页表，一个页目录项（page directory entry ，PDE）大小为4B,一个页表项（page-table entries PTEs）大小为4B，1个页目录表大小为4KB，1个页表大小为4KB。
+
 ```
 PTE格式（32 bit） :
   PFN19 ... PFN0|NOUSE9 ... NOUSE0|WRITABLE|VALID
@@ -90,6 +93,7 @@ VLAID：1表示有效，0表示无效
 请写出一个translation程序（可基于python、ruby、C、C++、LISP、JavaScript等），输入是一个虚拟地址和一个物理地址，能够自动计算出对应的页目录项的index值,页目录项内容的值，页表项的index值，页表项内容的值。即(pde_idx, pde_ctx, pte_idx, pte_cxt)
 
 请用如下值来验证你写的程序的正确性：
+
 ```
 va 0xc2265b1f, pa 0x0d8f1b1f
 va 0xcc386bbc, pa 0x0414cbbc
@@ -104,6 +108,7 @@ va 0xce6c3f32, pa 0x007d4f32
 ```
 
 参考的输出格式为：
+
 ```
 va 0xcd82c07c, pa 0x0c20907c, pde_idx 0x00000336, pde_ctx  0x00037003, pte_idx 0x0000002c, pte_ctx  0x0000c20b
 ```
