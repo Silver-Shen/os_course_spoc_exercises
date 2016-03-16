@@ -44,6 +44,7 @@ NOTICE
 ### 内存访问局部性的应用程序例子
 ---
 (1)(w4l2)下面是一个体现内存访问局部性好的简单应用程序例子，请参考，在linux中写一个简单应用程序，体现内存局部性差，并给出其执行时间。
+
 ```
 #include <stdio.h>
 #define NUM 1024
@@ -59,12 +60,21 @@ void main (void) {
 }
 ```
 可以用下的命令来编译和运行此程序：
+
 ```
 gcc -O0 -o goodlocality goodlocality.c
 time ./goodlocality
 ```
 可以看到其执行时间。
+>示例程序的总执行时间为0.04s，如果修改了内外循环变量的顺序
 
+```
+for (k = 0; k<COUNT; k++)
+  for (i = 0; i < NUM; i++)
+  for (j = 0; j  < NUM; j++)
+      A[j][i] = i+j;
+```
+>即每一次加法操作都会引发页面的切换（可能导致缺页异常），执行时间一下提高到了0.21s
 ## 小组思考题目
 ----
 
@@ -82,14 +92,17 @@ time ./goodlocality
 PTEs）大小为1 Byte，1个页目录表大小为32 Bytes，1个页表大小为32 Bytes。页目录基址寄存器（page directory base register，PDBR）保存了页目录表的物理地址（按页对齐）。
 
 PTE格式（8 bit） :
+
 ```
   VALID | PFN6 ... PFN0
 ```
 PDE格式（8 bit） :
+
 ```
   VALID | PT6 ... PT0
 ```
 其
+
 ```
 VALID==1表示，表示映射存在；VALID==0表示，表示内存映射不存在（有两种情况：a.对应的物理页帧swap out在硬盘上；b.既没有在内存中，页没有在硬盘上，这时页帧号为0x7F）。
 PFN6..0:页帧号或外存中的后备页号
@@ -101,6 +114,7 @@ PT6..0:页表的物理基址>>5
 在[物理内存模拟数据文件](./04-1-spoc-memdiskdata.md)中，给出了4KB物理内存空间和4KBdisk空间的值，PDBR的值。
 
 请回答下列虚地址是否有合法对应的物理内存，请给出对应的pde index, pde contents, pte index, pte contents，the value of addr in phy page OR disk sector。
+
 ```
 Virtual Address 6653:
 Virtual Address 1c13:
