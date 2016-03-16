@@ -18,7 +18,7 @@
     * [lab2 在线练习](all/03-3-lab2-quiz.md)**(done)**
     * [lab2 SPOC讨论](all/03-3-lab2-spoc-discussion.md)**(done)**
 * [虚拟内存管理](all/5&6-vmm.md)
-    * [lec8 SPOC讨论](all/04-1-spoc-discussion.md)
+    * [lec8 SPOC讨论](all/04-1-spoc-discussion.md)**(done)**
     * [lec9 在线练习](all/04-2-quiz.md)
     * [lec9 SPOC讨论](all/04-2-spoc-discussion.md)
     * [lab3 在线练习](all/04-3-lab3-quiz.md)
