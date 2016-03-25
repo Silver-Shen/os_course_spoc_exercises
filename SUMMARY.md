@@ -20,9 +20,9 @@
 * [虚拟内存管理](all/5&6-vmm.md)
     * [lec8 SPOC讨论](all/04-1-spoc-discussion.md)**(done)**
     * [lec9 在线练习](all/04-2-quiz.md)**(done)**
-    * [lec9 SPOC讨论](all/04-2-spoc-discussion.md)
-    * [lab3 在线练习](all/04-3-lab3-quiz.md)
-    * [lab3 SPOC讨论](all/04-3-lab3-spoc-discussion.md)    
+    * [lec9 SPOC讨论](all/04-2-spoc-discussion.md)**(done)**
+    * [lab3 在线练习](all/04-3-lab3-quiz.md)**(done)**
+    * [lab3 SPOC讨论](all/04-3-lab3-spoc-discussion.md)**(done)**  
 * [进程、线程管理](all/7-process&thread.md)
     * [lec11 在线练习](all/05-1-quiz.md)
     * [lec11 SPOC讨论](all/05-1-spoc-discussion.md)
