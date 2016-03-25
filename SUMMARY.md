@@ -24,9 +24,9 @@
     * [lab3 在线练习](all/04-3-lab3-quiz.md)**(done)**
     * [lab3 SPOC讨论](all/04-3-lab3-spoc-discussion.md)**(done)**  
 * [进程、线程管理](all/7-process&thread.md)
-    * [lec11 在线练习](all/05-1-quiz.md)
+    * [lec11 在线练习](all/05-1-quiz.md)**(done)**
     * [lec11 SPOC讨论](all/05-1-spoc-discussion.md)
-    * [lec12 在线练习](all/05-2-quiz.md)
+    * [lec12 在线练习](all/05-2-quiz.md)**(done)**
     * [lec12 SPOC讨论](all/05-2-spoc-discussion.md)
     * [lab4 在线练习](all/05-3-lab4-quiz.md)
     * [lab4 SPOC讨论](all/05-3-lab4-spoc-discussion.md)
