@@ -69,6 +69,7 @@ NOTICE
 
 ### 关键模拟变量
  - 进程控制块
+ 
 ```
 PROC_CODE = 'code_'
 PROC_PC = 'pc_'
@@ -78,6 +79,7 @@ PROC_STATE = 'proc_state_'
  - 当前进程 curr_proc 
  - 进程列表：proc_info是就绪进程的队列（list），
  - 在命令行（如下所示）需要说明每进程的行为特征：（１）使用CPU ;(2)等待I/O
+ 
 ```
    -l PROCESS_LIST, --processlist= X1:Y1,X2:Y2,...
    X 是进程的执行指令数; 
@@ -86,6 +88,7 @@ PROC_STATE = 'proc_state_'
  - 进程切换行为：系统决定何时(when)切换进程:进程结束或进程发出yield请求
 
 ### 进程执行
+
 ```
 instruction_to_execute = self.proc_info[self.curr_proc][PROC_CODE].pop(0)
 ```
