@@ -6,12 +6,13 @@
 1. 进程切换的可能时机有哪些？
 2. 分析ucore的进程切换代码，说明ucore的进程切换触发时机和进程切换的判断时机都有哪些。
 3. ucore的进程控制块数据结构是如何组织的？主要字段分别表示什么？有哪些函数对它进行了修改？有哪些函数用到它？
+
 ```
-arch_proc_struct
-mm_struct
-need_resched
-wait_state
-run_link、list_link、hash_link
+ arch_proc_struct 
+ mm_struct
+ need_resched
+ wait_state
+ run_link、list_link、hash_link
 ```
 
 ### 12.2 进程创建
@@ -62,6 +63,7 @@ run_link、list_link、hash_link
 ### 关键模拟变量
  - io_length : IO操作的执行时间
  - 进程控制块
+ 
 ```
 PROC_CODE = 'code_'
 PROC_PC = 'pc_'
@@ -71,6 +73,7 @@ PROC_STATE = 'proc_state_'
  - 当前进程 curr_proc 
  - 进程列表：proc_info是就绪进程的队列（list），
  - 在命令行（如下所示）需要说明每进程的行为特征：（１）使用CPU ;(2)等待I/O
+ 
 ```
    -l PROCESS_LIST, --processlist= X1:Y1,X2:Y2,...
    X 是进程的执行指令数; 
@@ -80,6 +83,7 @@ PROC_STATE = 'proc_state_'
  - 进程切换行为：系统决定何时(when)切换进程:进程结束或进程发出yield请求
 
 ### 进程执行
+
 ```
 instruction_to_execute = self.proc_info[self.curr_proc][PROC_CODE].pop(0)
 ```

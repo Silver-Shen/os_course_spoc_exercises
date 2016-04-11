@@ -19,6 +19,7 @@
 ### 执行流程
 
 (5) do_fork中的内核线程执行的第一条指令是什么？它是如何过渡到内核线程对应的函数的？
+
 ```
 tf.tf_eip = (uint32_t) kernel_thread_entry;
 /kern-ucore/arch/i386/init/entry.S
@@ -26,6 +27,7 @@ tf.tf_eip = (uint32_t) kernel_thread_entry;
 ```
 
 (6)内核线程的堆栈初始化在哪？
+
 ```
 tf和context中的esp
 ```

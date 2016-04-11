@@ -25,15 +25,15 @@
     * [lab3 SPOC讨论](all/04-3-lab3-spoc-discussion.md)**(done)**  
 * [进程、线程管理](all/7-process&thread.md)
     * [lec11 在线练习](all/05-1-quiz.md)**(done)**
-    * [lec11 SPOC讨论](all/05-1-spoc-discussion.md)
+    * [lec11 SPOC讨论](all/05-1-spoc-discussion.md)**(done)**
     * [lec12 在线练习](all/05-2-quiz.md)**(done)**
-    * [lec12 SPOC讨论](all/05-2-spoc-discussion.md)
-    * [lab4 在线练习](all/05-3-lab4-quiz.md)
+    * [lec12 SPOC讨论](all/05-2-spoc-discussion.md)**(done)**
+    * [lab4 在线练习](all/05-3-lab4-quiz.md)**(done)**
     * [lab4 SPOC讨论](all/05-3-lab4-spoc-discussion.md)
     * [lab5 在线练习](all/05-4-lab5-quiz.md)
     * [lab5 SPOC讨论](all/05-4-lab5-spoc-discussion.md)    
 * [CPU调度](all/8-sched.md)
-    * [lec15 在线练习](all/06-1-quiz.md)
+    * [lec15 在线练习](all/06-1-quiz.md)**(done)**
     * [lec15 SPOC讨论](all/06-1-spoc-discussion.md)
     * [lab6 在线练习](all/06-2-lab6-quiz.md)
     * [lab6 SPOC讨论](all/06-2-lab6-spoc-discussion.md)     
