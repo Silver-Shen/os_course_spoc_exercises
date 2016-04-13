@@ -13,7 +13,48 @@
 (2) 如何知道ucore的两个线程同在一个进程？
 
 (3) context和trapframe分别在什么时候用到？
+>先说使用情况更为广泛的trapframe, trapframe叫做异常帧，是保存在内核堆栈上的进程上下文信息。在中断、异常或者系统调用的时候，会由硬件和软件协同来保存这个数据结构，这个结构如下所示
 
+```
+struct trapframe {
+    struct pushregs tf_regs;
+    uint16_t tf_gs;
+    uint16_t tf_padding0;
+    uint16_t tf_fs;
+    uint16_t tf_padding1;
+    uint16_t tf_es;
+    uint16_t tf_padding2;
+    uint16_t tf_ds;
+    uint16_t tf_padding3;
+    uint32_t tf_trapno;
+    /* below here defined by x86 hardware */
+    uint32_t tf_err;
+    uintptr_t tf_eip;
+    uint16_t tf_cs;
+    uint16_t tf_padding4;
+    uint32_t tf_eflags;
+    /* below here only when crossing rings, such as from user to kernel */
+    uintptr_t tf_esp;
+    uint16_t tf_ss;
+    uint16_t tf_padding5;
+} __attribute__((packed));
+```
+其中，有一部分是由硬件直接保存的(error code及以下)，并且还会根据中断时所在的特权级选择性保存ss和esp，有一部分是通过软件来保存的（主要为段寄存器和通用寄存器），总的来说，trapframe描述了一个进程在正常执行逻辑中的上下文信息，对进程是不透明的。
+而context则不同，乍一看它的结构和trapframe中的tf_regs差不多
+
+```
+struct context {
+    uint32_t eip;
+    uint32_t esp;
+    uint32_t ebx;
+    uint32_t ecx;
+    uint32_t edx;
+    uint32_t esi;
+    uint32_t edi;
+    uint32_t ebp;
+};
+```
+但context保存的是进程在中断服务例程（或者异常系统调用例程）中执行的上下文信息，在lab4中，context保存的是在proc_run这个函数中执行的现场信息，这个函数里面有一个switch_to，在这里保存了context，这就意味着context对于进程是透明的，进程以为自己进入了服务例程之后就直接恢复了，其实可能并不是这样，在其中可能被调度过，调度时需要保存的就是context
 (4) 用户态或内核态下的中断处理有什么区别？在trapframe中有什么体现？
 
 ### 13.3 执行流程
