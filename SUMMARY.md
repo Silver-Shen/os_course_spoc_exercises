@@ -30,8 +30,8 @@
     * [lec12 SPOC讨论](all/05-2-spoc-discussion.md)**(done)**
     * [lab4 在线练习](all/05-3-lab4-quiz.md)**(done)**
     * [lab4 SPOC讨论](all/05-3-lab4-spoc-discussion.md)**(done)**
-    * [lab5 在线练习](all/05-4-lab5-quiz.md)
-    * [lab5 SPOC讨论](all/05-4-lab5-spoc-discussion.md)    
+    * [lab5 在线练习](all/05-4-lab5-quiz.md)**(done)**
+    * [lab5 SPOC讨论](all/05-4-lab5-spoc-discussion.md)**(done)**
 * [CPU调度](all/8-sched.md)
     * [lec15 在线练习](all/06-1-quiz.md)**(done)**
     * [lec15 SPOC讨论](all/06-1-spoc-discussion.md)
