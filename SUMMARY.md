@@ -34,13 +34,13 @@
     * [lab5 SPOC讨论](all/05-4-lab5-spoc-discussion.md)**(done)**
 * [CPU调度](all/8-sched.md)
     * [lec15 在线练习](all/06-1-quiz.md)**(done)**
-    * [lec15 SPOC讨论](all/06-1-spoc-discussion.md)
-    * [lab6 在线练习](all/06-2-lab6-quiz.md)
-    * [lab6 SPOC讨论](all/06-2-lab6-spoc-discussion.md)     
+    * [lec15 SPOC讨论](all/06-1-spoc-discussion.md)**(done)**
+    * [lab6 在线练习](all/06-2-lab6-quiz.md)**(done)**
+    * [lab6 SPOC讨论](all/06-2-lab6-spoc-discussion.md)**(done)**     
 * [同步](all/9-sync.md)
-    * [lec17 在线练习](all/07-1-quiz.md)
-    * [lec17 SPOC讨论](all/07-1-spoc-discussion.md)    
-    * [lec18 在线练习](all/07-2-quiz.md)    
+    * [lec17 在线练习](all/07-1-quiz.md)**(done)**
+    * [lec17 SPOC讨论](all/07-1-spoc-discussion.md)**(done)**    
+    * [lec18 在线练习](all/07-2-quiz.md)**(done)**    
     * [lec18 SPOC讨论](all/07-2-spoc-discussion.md)
     * [lec19 在线练习](all/07-3-lab7-quiz.md)      
     * [lab7 SPOC讨论](all/07-3-lab7-spoc-discussion.md)          
