@@ -41,18 +41,18 @@
     * [lec17 在线练习](all/07-1-quiz.md)**(done)**
     * [lec17 SPOC讨论](all/07-1-spoc-discussion.md)**(done)**    
     * [lec18 在线练习](all/07-2-quiz.md)**(done)**    
-    * [lec18 SPOC讨论](all/07-2-spoc-discussion.md)
-    * [lec19 在线练习](all/07-3-lab7-quiz.md)      
-    * [lab7 SPOC讨论](all/07-3-lab7-spoc-discussion.md)          
+    * [lec18 SPOC讨论](all/07-2-spoc-discussion.md)**(done)**
+    * [lec19 在线练习](all/07-3-lab7-quiz.md)**(done)**
+    * [lab7 SPOC讨论](all/07-3-lab7-spoc-discussion.md)**(done)**          
 * [死锁和进程间通信](all/11-deadlock.md)
-    * [lec20 在线练习](all/08-1-quiz.md)
-    * [lec20 SPOC讨论](all/08-1-spoc-discussion.md)
+    * [lec20 在线练习](all/08-1-quiz.md)**(done)**
+    * [lec20 SPOC讨论](all/08-1-spoc-discussion.md)**(done)**
 * [文件系统](all/12-filesystem.md)
-    * [lec21 在线练习](all/09-1-quiz.md)
-    * [lec21 SPOC讨论](all/09-1-spoc-discussion.md)
-    * [lab8 在线练习](all/09-2-lab8-quiz.md)      
-    * [lab8 SPOC讨论](all/09-2-lab8-spoc-discussion.md)          
-* [I/O子系统](all/13-io.md)
-    * [lec23 在线练习](all/10-1-quiz.md)
-    * [lec23 SPOC讨论](all/10-1-spoc-discussion.md)
+    * [lec21 在线练习](all/09-1-quiz.md)**(done)**
+    * [lec21 SPOC讨论](all/09-1-spoc-discussion.md)**(done)**
+    * [lab8 在线练习](all/09-2-lab8-quiz.md)**(done)**      
+    * [lab8 SPOC讨论](all/09-2-lab8-spoc-discussion.md)**(done)**         
+* [I/O子系统](all/13-io.md)**(done)**
+    * [lec23 在线练习](all/10-1-quiz.md)**(done)**
+    * [lec23 SPOC讨论](all/10-1-spoc-discussion.md)**(done)**
 
