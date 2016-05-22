@@ -39,6 +39,7 @@ s.count--;              //有可用资源，占用该资源；
 >一个或多个生产者在生成数据后放在一个缓冲区里,单个消费者从缓冲区取出数据处理,任何时刻只能有一个生产者或消费者可访问缓冲区
 3. 为什么在生产者-消费者问题中先申请互斥信息量会导致死锁？
 >假设缓冲区满了，而此时生产者先申请了互斥信号量，占有了临界区访问权，然后检查同步信号量发现不满足，只能进入睡眠等待；此时必须有消费者能够进入临界区消费掉缓冲区里的数据才能唤醒生产者，但由于互斥信号量被占有，消费者无法进入临界区，故死锁。
+4. 为何二值信号量的实现比计数信号量的实现要简单？请说明．
 
 ### 18.3 管程
 
@@ -60,9 +61,71 @@ s.count--;              //有可用资源，占用该资源；
 >读者优先指只要有读者在读后续来的读者就直接进入，写者只能等待；写者优先就相反
 2. 在读者-写者问题的读者优先实现中优先于读者到达的写者在什么地方等待？
 >在读写互斥的信号量队列中等待
+
+
+### 18.6 信号量，管程，条件变量 
+
+如果能用管程实现信号量，也能用信号量实现管程，则我们可以称二者在功能上等价．
+
+1. 请用管程with条件变量来实现信号量
+
+2. 请用信号量来实现管程with条件变量
+
+3. 请评价如下的实现(用信号量来实现管程with条件变量)是否合理？简要说明理由．
+
+```
+Implementing a Monitor
+
+CONTROL VARIABLES:
+
+	mutex: semaphore, initial value 1 (FREE)
+	next: record, with 2 fields:
+		next.sem: semaphore, initial value 0
+		next.count: counter, initial value 0
+
+	FOR EACH CONDITION x:
+	
+	x: record, with 2 fields:
+		x.sem: semaphore, initial value 0
+		x.count: counter, initial value 0
+ENTRY PROTOCOL (at the beginning of each monitor function):
+
+	/* wait for exclusive access to the monitor */
+	P(mutex);
+EXIT PROTOCOL (at the end of each monitor function):
+
+	/* if there are processes in the "next" queue, release one */
+	if (next.count > 0) V(next.sem);
+
+	/* otherwise, release the monitor */
+	else V(mutex);
+WAIT ON CONDITION x (x.wait):
+
+	/* first perform the exit protocol */
+	if (next.count > 0) V(next.sem);
+	else V(mutex);
+
+	/* now wait on the condition queue */
+	x.count++;
+	P(x.sem);
+	x.count--;
+SIGNAL CONDITION x (x.signal):
+
+	/* do nothing unless a process is waiting */
+	if (x.count > 0) {
+
+		/* release the next waiting process */
+		V(x.sem);
+
+		/* wait on the "next" queue */
+		next.count++;
+		P(next.sem);
+		next.count--;
+	}
+```
 ## 小组思考题
 
-1. （spoc） 每人用python threading机制用信号量和条件变量两种手段分别实现[40个同步互斥问题](07-2-spoc-pv-problems.md)中的一题。请先理解[python threading 机制的介绍和实例](https://github.com/chyyuu/ucore_lab/tree/master/related_info/lab7/semaphore_condition)
+1. （spoc） 每人使用C++或python语言用信号量和条件变量两种手段分别实现[40个同步互斥问题](07-2-spoc-pv-problems.md)中的一题。请先理解[python threading 机制的介绍和实例](https://github.com/chyyuu/ucore_lab/tree/master/related_info/lab7/semaphore_condition)
 
  > 参考：[2015年操作系统课的信号量问题回答](https://piazza.com/class/i5j09fnsl7k5x0?cid=391)
  
@@ -71,3 +134,4 @@ s.count--;              //有可用资源，占用该资源；
  > 建议重视测试用例的设计，以检查自己的实现是否有错。
 
 2. (spoc)设计某个方法，能够动态检查出对于两个或多个进程的同步互斥问题执行中，没有互斥问题，能够同步等，以说明实现的正确性。
+3. (spoc challenge)管程和信号量在解决同步互斥问题上是否等价？请证明/说明你的结论．
