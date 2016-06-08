@@ -23,7 +23,7 @@
     * [lec9 SPOC讨论](all/04-2-spoc-discussion.md)**(done)**
     * [lab3 在线练习](all/04-3-lab3-quiz.md)**(done)**
     * [lab3 SPOC讨论](all/04-3-lab3-spoc-discussion.md)**(done)**  
-* [进程、线程管理](all/7-process&thread.md)
+* [进程、线程管理](all/7-process&thread.md)**(done)**
     * [lec11 在线练习](all/05-1-quiz.md)**(done)**
     * [lec11 SPOC讨论](all/05-1-spoc-discussion.md)**(done)**
     * [lec12 在线练习](all/05-2-quiz.md)**(done)**
@@ -32,22 +32,22 @@
     * [lab4 SPOC讨论](all/05-3-lab4-spoc-discussion.md)**(done)**
     * [lab5 在线练习](all/05-4-lab5-quiz.md)**(done)**
     * [lab5 SPOC讨论](all/05-4-lab5-spoc-discussion.md)**(done)**
-* [CPU调度](all/8-sched.md)
+* [CPU调度](all/8-sched.md)**(done)**
     * [lec15 在线练习](all/06-1-quiz.md)**(done)**
     * [lec15 SPOC讨论](all/06-1-spoc-discussion.md)**(done)**
     * [lab6 在线练习](all/06-2-lab6-quiz.md)**(done)**
     * [lab6 SPOC讨论](all/06-2-lab6-spoc-discussion.md)**(done)**     
-* [同步](all/9-sync.md)
+* [同步](all/9-sync.md)**(done)**
     * [lec17 在线练习](all/07-1-quiz.md)**(done)**
     * [lec17 SPOC讨论](all/07-1-spoc-discussion.md)**(done)**    
     * [lec18 在线练习](all/07-2-quiz.md)**(done)**    
     * [lec18 SPOC讨论](all/07-2-spoc-discussion.md)**(done)**
     * [lec19 在线练习](all/07-3-lab7-quiz.md)**(done)**
     * [lab7 SPOC讨论](all/07-3-lab7-spoc-discussion.md)**(done)**          
-* [死锁和进程间通信](all/11-deadlock.md)
+* [死锁和进程间通信](all/11-deadlock.md)**(done)**
     * [lec20 在线练习](all/08-1-quiz.md)**(done)**
     * [lec20 SPOC讨论](all/08-1-spoc-discussion.md)**(done)**
-* [文件系统](all/12-filesystem.md)
+* [文件系统](all/12-filesystem.md)**(done)**
     * [lec21 在线练习](all/09-1-quiz.md)**(done)**
     * [lec21 SPOC讨论](all/09-1-spoc-discussion.md)**(done)**
     * [lab8 在线练习](all/09-2-lab8-quiz.md)**(done)**      
